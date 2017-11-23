@@ -129,7 +129,7 @@ switch (ENVIRONMENT)
  *
  * NO TRAILING SLASH!
  */
-	$view_folder = 'E:/project/familybook2.0/web/view';
+	$view_folder = 'E:/project/familybook2.0/fb2_application/views';
 
 
 /*
