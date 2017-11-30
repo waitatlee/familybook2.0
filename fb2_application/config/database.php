@@ -77,6 +77,7 @@ $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
 	'username' => 'root',
+	'port'     => 3308,
 	'password' => '',
 	'database' => 'familybook2',
 	'dbdriver' => 'mysqli',
