@@ -1,28 +1,41 @@
 <?php
-
 /**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2017/11/30 0030
- * Time: 23:45
+ * 用户管理类.
+ * User: waitatlee@163.com
+ * Date: 2017/12/05
+ * Time: 20:46
  */
 class News extends CI_Controller
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('news_model');
+        $this->load->model('user_model');
         $this->load->helper('url');
     }
 
-    public function index()
-    {
-        $data['news'] = $this->news_model->get_news();
-        $data['title'] = '新闻列表!';
+    /**
+     * 用户登录
+     */
+    public function login(){
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $data['title'] = '用户登录';
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('news/index', $data);
-        $this->load->view('templates/footer');
+        $this->form_validation->set_rules('account', '账号', 'required');
+        $this->form_validation->set_rules('password', 'Text', 'required');
+        if ($this->form_validation->run() === FALSE){
+            $this->load->view('templates/header', $data);
+            $this->load->view('news/create');
+            $this->load->view('templates/footer');
+        } else {
+            $this->news_model->set_news();
+            $data['news'] = $this->news_model->get_news();
+            $data['title'] = '用戶登录!';
+            $this->load->view('templates/header', $data);
+            $this->load->view('user/login', $data);
+            $this->load->view('templates/footer');
+        }
     }
 
     public function view($slug = NULL)
@@ -67,7 +80,4 @@ class News extends CI_Controller
             $this->load->view('templates/footer');
         }
     }
-
-
-
 }
